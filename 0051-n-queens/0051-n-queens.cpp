@@ -1,64 +1,71 @@
 class Solution {
+    
+	vector<vector<string>> ans;
 public:
-    vector<vector<string> > ans;
     
-    vector<vector<string>> solveNQueens(int n) {    
+	bool issafe(int r,int c,vector<string>&v,int n){
         
-        vector<string> board(n, string(n, '.'));  // creating an empty board
-        solve(board, 0);
-        return ans;
+		//column check 
+		for(int i=0;i<=r;i++){
+			if(v[i][c]=='Q') return false;
+		}
         
-    }
+		//diagonal check upper left side
+		int row=r,col=c;
+        
+		while(row>=0 && col>=0){
+            
+			if(v[row][col]=='Q') 
+                return false;
+            
+			row--,col--;
+		}
+        
+		//diagonal check upper right side
+		row=r,col=c;
+        
+		while(row>=0 && col<n){
+            
+			if(v[row][col]=='Q') 
+                return false;
+            
+			row--,col++;
+		}
+        
+		return true;
+	}
     
-    bool check(vector<string>& board, int row, int col) {
-        
-        int n = board.size();
-        
-        for(int i = 0; i < n; i++) {
-            
-            if(board[i][col] == 'Q')  // checking if any queen already placed on same column previously
-                return false;
-            
-            // checking all diagonals-
-            if(row - i >= 0 && col - i >= 0 && board[row - i][col - i] == 'Q')
-                return false;
-            
-            if(row - i >= 0 && col + i <  n && board[row - i][col + i] == 'Q') 
-                return false;
-            
-            if(row + i <  n && col - i >= 0 && board[row + i][col - i] == 'Q')
-                return false;
-            
-            if(row + i <  n && col + i <  n && board[row + i][col + i] == 'Q') 
-                return false;
-            
-        }
-        
-        return true;
-    }
     
-    // Recursive solver - Tries all possible placement of queen for current row & recurses for next row
-    void solve(vector<string>& board, int row) {
+	void helper(int r,vector<string> &v,int n){
         
-        // base condition. When we reach here, a valid placement combination has been formed. 
-        //So insert it into ans
+		 if(r==n){ //if row reaches end of the board 
+			 ans.push_back(v);
+			 return ;
+		 }
         
-        if(row == board.size()) { 
+		for(int i=0;i<n;i++){  //fixing row and traversing in column
             
-            ans.push_back(board);
-            return;
-        }            
-        
-        // Try placing a queen on each column for a given row. Explore next row by placing Q at each                valid column for the current row
-        
-        for(int col = 0; col < board.size(); col++) 
-            
-            if(check(board, row, col)) {
+			if(issafe(r,i,v,n) == true){
                 
-                board[row][col] = 'Q';    // Queen placed on a valid cell
-                solve(board, row + 1);    // exploring next row
+				v[r][i]='Q';
+				helper(r+1,v,n);  // solve recusively 
                 
-                board[row][col] = '.';    // backtracking to get all possible solutions
-            }            
-    }
+				v[r][i]='.';  // backtracking 
+			}
+		}
+	}
+    
+	vector<vector<string>> solveNQueens(int n) {
+        
+		vector<string> v;
+        
+		string s(n,'.');
+        
+		for(int i=0;i<n;i++)
+            v.push_back(s);
+        
+		helper(0,v,n);
+        
+		return ans;
+	}
 };
