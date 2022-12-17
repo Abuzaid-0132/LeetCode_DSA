@@ -12,7 +12,7 @@ public:
     
     bool check(vector<string>& board, int row, int col) {
         
-        int n = size(board);
+        int n = board.size();
         
         for(int i = 0; i < n; i++) {
             
@@ -40,16 +40,18 @@ public:
     // Recursive solver - Tries all possible placement of queen for current row & recurses for next row
     void solve(vector<string>& board, int row) {
         
-        // base condition. When we reach here, a valid placement combination has been formed. So insert it into ans
-        if(row == size(board)) { 
+        // base condition. When we reach here, a valid placement combination has been formed. 
+        //So insert it into ans
+        
+        if(row == board.size()) { 
             
             ans.push_back(board);
             return;
         }            
         
-        // Try placing a queen on each column for a given row. Explore next row by placing Q at each valid column for the current row
+        // Try placing a queen on each column for a given row. Explore next row by placing Q at each                valid column for the current row
         
-        for(int col = 0; col < size(board); col++) 
+        for(int col = 0; col < board.size(); col++) 
             
             if(check(board, row, col)) {
                 
