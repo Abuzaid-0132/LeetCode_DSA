@@ -1,71 +1,75 @@
 class Solution {
-    
-	vector<vector<string>> ans;
 public:
     
-	bool issafe(int r,int c,vector<string>&v,int n){
+    bool isSafe(vector<string>& board,int x,int y,int n){
         
-		//column check 
-		for(int i=0;i<=r;i++){
-			if(v[i][c]=='Q') return false;
-		}
+        // check if queen is alredy present in target row or not
+        for(int row=0;row<x;row++)
+            if(board[row][y]=='Q') 
+                return false;
         
-		//diagonal check upper left side
-		int row=r,col=c;
+        //check if queen is alredy present in left side daigonal
+        int row=x;
+        int col=y;
         
-		while(row>=0 && col>=0){
+        while(col>=0 && row>=0){
             
-			if(v[row][col]=='Q') 
+            if(board[row][col]=='Q') 
                 return false;
             
-			row--,col--;
-		}
+            col--;
+            row--;
+        }
         
-		//diagonal check upper right side
-		row=r,col=c;
+        //check if queen is alredy present in left daigonal
+        row=x;
+        col=y;
         
-		while(row>=0 && col<n){
+        while(col<n && row>=0){
             
-			if(v[row][col]=='Q') 
+            if(board[row][col]=='Q') 
                 return false;
             
-			row--,col++;
-		}
-        
-		return true;
-	}
-    
-    
-	void helper(int r,vector<string> &v,int n){
-        
-		 if(r==n){ //if row reaches end of the board 
-			 ans.push_back(v);
-			 return ;
-		 }
-        
-		for(int i=0;i<n;i++){  //fixing row and traversing in column
+            col++;
+            row--;
             
-			if(issafe(r,i,v,n) == true){
-                
-				v[r][i]='Q';
-				helper(r+1,v,n);  // solve recusively 
-                
-				v[r][i]='.';  // backtracking 
-			}
-		}
-	}
+        } 
+        
+        //If you reach here it means current position is safe to place queen
+        return true;
+    }
     
-	vector<vector<string>> solveNQueens(int n) {
+    
+    void dfs(vector<vector<string>>& ans,int x,int n,vector<string>& board){
         
-		vector<string> v;
+        if(x>=n){
+            ans.push_back(board);
+            return;
+        }
         
-		string s(n,'.');
+        for(int i=0;i<n;i++){
+            
+            //check is it safe to place queen at current position
+            if(isSafe(board,x,i,n) == true){
+                
+                //placed queen at current 
+                board[x][i]='Q';
+                dfs(ans,x+1,n,board);
+                
+                //unplaced queen at current on bactracking for further check
+                board[x][i]='.';
+            }
+        }
+    }
+    
+    
+    vector<vector<string>> solveNQueens(int n) {
         
-		for(int i=0;i<n;i++)
-            v.push_back(s);
+        vector<vector<string>> ans;
+        vector<string> board(n,string(n,'.'));
         
-		helper(0,v,n);
-        
-		return ans;
-	}
+        dfs(ans,0,n,board);
+       
+        return ans;
+    }
 };
