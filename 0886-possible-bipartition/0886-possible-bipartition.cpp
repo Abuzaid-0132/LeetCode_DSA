@@ -24,7 +24,7 @@ class Solution {
                 }              
             }            
         }
-        return 1;  
+        return true;  
     }
 public:
     bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
@@ -44,7 +44,7 @@ public:
             
             if(color[i]==-1)
                 if(bfs(adj,color,i) == false)
-                   return 0;
+                   return false;
         }
         return true;
     }       
