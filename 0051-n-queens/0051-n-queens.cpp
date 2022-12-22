@@ -36,6 +36,7 @@ public:
         } 
         
         //If you reach here it means current position is safe to place queen
+        
         return true;
     }
     
@@ -73,3 +74,4 @@ public:
         return ans;
     }
 };
+
