@@ -1,28 +1,17 @@
 class Solution {
 public:
-    
-    void Count_SetBits(int n, vector<int> &result) {
-        
-        int setBit = 0;
-        
-        while(n != 0) {
-            
-            n = n & (n-1);
-            setBit++;
-        
-        }
-        
-        result.push_back(setBit);
-    }
-    
     vector<int> countBits(int n) {
         
-        vector<int> result;
+        vector<int> memo(n+1);
         
-        for(int i=0; i<=n; i++) 
-            Count_SetBits(i,result);
+          // memo[i] = No. of 1s from 0 to i.
+        
+        memo[0] = 0;
+        
+        for(int i=0; i<=n; i++)
+            memo[i] = memo[i/2] + i % 2;
         
         
-        return result;
+        return memo;
     }
 };
