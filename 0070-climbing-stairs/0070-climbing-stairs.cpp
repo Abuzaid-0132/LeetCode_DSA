@@ -1,16 +1,36 @@
 class Solution {
 public:
+    
+    int Stairs(int CurrStair, int TargetStair, unordered_map<int,int> &mp) {
+        
+        if(CurrStair == TargetStair)
+            return 1;
+        
+        if(CurrStair > TargetStair)
+            return 0;
+        
+        int CurrKey = CurrStair;
+        
+        if(mp.find(CurrKey) != mp.end())
+            return mp[CurrKey];
+        
+        int One = Stairs(CurrStair+1, TargetStair, mp);
+        
+        int Two = Stairs(CurrStair+2, TargetStair, mp);
+        
+        mp[CurrStair] = One + Two;
+        
+        return One + Two;
+        
+    }
+    
     int climbStairs(int n) {
         
-        vector<int> dp(n+1);
+        unordered_map<int,int> mp;
         
-        dp[0] = 1;
-        dp[1] = 1;
+        int ans = Stairs(0,n,mp);
         
-        for(int i=2; i<=n; i++)
-            dp[i] = dp[i-1] + dp[i-2];
-        
-        return dp[n];
+        return ans;
         
     }
 };
