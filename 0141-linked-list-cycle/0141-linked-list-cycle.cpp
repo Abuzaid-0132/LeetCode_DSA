@@ -10,17 +10,16 @@ class Solution {
 public:
     bool hasCycle(ListNode *head) {
         
-        ListNode* curr = head;
-        unordered_set<ListNode*> set;
+        ListNode* slow = head;
+        ListNode* fast = head;
         
-        while(curr != NULL) {
+        while(fast != NULL && fast->next != NULL) {
             
-            if(set.find(curr) != set.end())
+            slow = slow->next;
+            fast = fast->next->next;
+            
+            if(fast == slow)
                 return true;
-            
-            set.insert(curr);
-            curr = curr->next;
-            
         }
         
         return false;
