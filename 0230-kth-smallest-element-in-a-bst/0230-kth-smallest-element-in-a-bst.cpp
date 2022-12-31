@@ -30,22 +30,22 @@ public:
         vector<int> inorder;
         traversal(root,inorder);
         
-        int ans = 0;
+        return inorder[k-1];
         
-        priority_queue<int> pq;  // max heap.
+//         priority_queue<int> pq;  // max heap.
         
-        for(int i=0; i<inorder.size(); i++) {
+//         for(int i=0; i<inorder.size(); i++) {
             
-            if(pq.size() < k) 
-                pq.push(inorder[i]);
-            else{
+//             if(pq.size() < k) 
+//                 pq.push(inorder[i]);
+//             else{
                 
-                pq.push(inorder[i]);
-                pq.pop();
-            }
+//                 pq.push(inorder[i]);
+//                 pq.pop();
+//             }
             
-        }
+//         }
         
-        return pq.top();
+//         return pq.top();
     }
 };
