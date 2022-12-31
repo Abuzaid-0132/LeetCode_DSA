@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int res = 0, empty = 1;
+    int res = 0, count_zero = 1;
     
     void dfs(vector<vector<int>>& grid, int x, int y, int count) {
         
@@ -10,7 +10,9 @@ public:
         
         if (grid[x][y] == 2) {
             
-            if(empty == count) res++; 
+            if(count_zero == count) 
+                res++; 
+            
                 return;
         }
         
@@ -40,7 +42,7 @@ public:
                     start_x = i, start_y = j;
                 
                 else if (grid[i][j] == 0) 
-                    empty++;
+                    count_zero++;
             }
             
         }
