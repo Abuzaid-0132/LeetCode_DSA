@@ -14,15 +14,15 @@ private:
 
     int dfs(TreeNode* root, int& maxsum) {
 
-        if(!root) 
+        if(root == NULL) 
             return 0;
 
-        int l = max(0,dfs(root->left,maxsum));
-        int r = max(0,dfs(root->right,maxsum));
+        int left_sum = max(0, dfs(root->left,maxsum));
+        int right_sum = max(0, dfs(root->right,maxsum));
 
-        maxsum = max(l+r+root->val, maxsum);
+        maxsum = max(left_sum + right_sum + root->val, maxsum);
 
-        return root->val + max(l,r);
+        return root->val + max(left_sum, right_sum);
     }
 
 public:
