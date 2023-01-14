@@ -38,7 +38,6 @@ public:
 
         // traverse in the baseStr and find the parent of each char.
        for(auto i=0;i<baseStr.size();i++)
-           
             baseStr[i]=find(baseStr[i]-'a')+'a';
 
         return baseStr;
