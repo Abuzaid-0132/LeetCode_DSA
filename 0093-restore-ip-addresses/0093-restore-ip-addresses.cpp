@@ -19,26 +19,24 @@ public:
     }
     
     
-    void solve(vector<string>&ans,string temp, int i,int part, string s) {
+    void solve(vector<string>&ans, string temp, int i, int part, string s) {
         
       if(s.size() == i && part == 4) {
+          
           ans.push_back(temp.substr(0,temp.size()-1));
           return;
       }
         
-      else if(s.size()== i || part == 4) {
+      else if(s.size()== i || part == 4) 
           return;
-      }
         
       solve(ans,temp+s[i]+"." ,i+1,part+1,s);
         
-      if(s.size()>i+1 && isvalid(s.substr(i,2))) {
+      if(s.size() > i+1 && isvalid(s.substr(i,2))) 
           solve(ans,temp+s.substr(i,2)+".",i+2,part+1,s);   
-      }
         
-      if(s.size()>i+2 && isvalid(s.substr(i,3))) {
+      if(s.size() > i+2 && isvalid(s.substr(i,3))) 
           solve(ans,temp+s.substr(i,3)+".",i+3,part+1,s);   
-      }
 
     }
     
