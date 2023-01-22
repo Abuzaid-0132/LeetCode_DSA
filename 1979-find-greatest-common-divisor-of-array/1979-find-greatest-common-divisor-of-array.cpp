@@ -1,27 +1,12 @@
 class Solution {
 public:
-    int gcdnum(int a,int b) {
-        
-        if(b==0)     // base case
-            return a;
-        
-        return gcdnum(b,a%b);
-    }
     
     int findGCD(vector<int>& nums) {
         
-        int mn=nums[0];
-        int mx=nums[0];
+        int mn=*min_element(nums.begin(),nums.end());
         
-        for(int i=1;i<nums.size();i++) {
-            
-            if(mn>nums[i])
-                mn=nums[i];
-            
-            if(mx<nums[i])
-                mx=nums[i];
-        }
+        int mx=*max_element(nums.begin(),nums.end());
         
-        return gcdnum(mn,mx);
+        return gcd(mn,mx);
     }
 };
