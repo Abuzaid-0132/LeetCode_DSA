@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        
+        vector<pair<int,int>> arr(n+1,{0,0});
+        
+        for(int i=0; i<trust.size(); i++) {
+            arr[trust[i][0]].first++;
+            arr[trust[i][1]].second++;
+            
+        }
+        
+        for(int i=1; i<arr.size(); i++) {
+            
+            if(arr[i].first == 0 && arr[i].second == n-1)
+                return i;
+        }
+        
+        return -1;
+    }
+};
