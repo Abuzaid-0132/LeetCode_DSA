@@ -15,13 +15,13 @@ class Solution {
         // your code here
         string upr="",lwr="";
         
-        for(int i=0;i<n;i++) {
+        for(int i=0; i<n; i++) {
             
-            if(str[i]>='a' && str[i]<='z')
-                lwr+=str[i];
+            if(str[i] >= 'a' && str[i] <= 'z')
+                lwr += str[i];
                 
             else
-                upr+=str[i];
+                upr += str[i];
         }
         
         sort(lwr.begin(),lwr.end());
@@ -30,15 +30,15 @@ class Solution {
         
         string ans="";
         
-        int a=0,b=0;
+        int a = 0,b = 0;
         
-        for(int i=0;i<n;i++) {
+        for(int i=0; i<n; i++) {
             
-            if(str[i]>='a' && str[i]<='z')
-                ans+=lwr[a++];
+            if(str[i] >= 'a' && str[i] <= 'z')
+                ans += lwr[a++];
                 
             else
-                ans+=upr[b++];
+                ans += upr[b++];
         }
         
         return ans;
