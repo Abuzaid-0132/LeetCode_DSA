@@ -21,18 +21,16 @@ public:
         
         // Condition given in the Question
         if(rev > INT_MAX || rev < INT_MIN)
-        {
             return 0;
-        }
+        
         
         // Since we converted into positive before
         // Now check and result it appropriately
-        if(x >= 0){
+        if(x >= 0)
             return rev;
-        }
         
-        else{
+        else
             return -rev;
-        }
+        
     }
 };
