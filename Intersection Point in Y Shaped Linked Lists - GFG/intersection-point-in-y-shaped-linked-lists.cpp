@@ -50,70 +50,24 @@ struct Node {
 
 class Solution {
 public:
-
-    int FindLength(Node *begin) {
-            
-        int count = 0;
-        
-        while(begin != NULL) {
-            
-            count++;
-            begin = begin->next;
-        }
-        
-        return count;
-    }
-    
-    Node *FindCommon(Node *first,int len) {
-        
-        int a = 0;
-        
-        while(first != NULL and a < len) {
-            
-            a++;
-            first = first->next;
-        }
-        
-        return first;
-    }
-    
     int intersectPoint(Node* head1, Node* head2) {
-        // Your Code Here
-        int length1 = FindLength(head1);
-        int length2 = FindLength(head2);
+        // Your Code Here.
         
-        Node *temp = NULL;
-        int len;
+        if (head1 == NULL || head2 == NULL) 
+            return -1;
         
-        if(length1 > length2) {
+        Node* p = head1;
+        
+        Node* q = head2;
+        
+        while (p != q) {
             
-            len = (length1 - length2);
-            temp = FindCommon(head1,len);
+            p =  (p != NULL) ? p->next : head2;
             
-            while(temp != head2) {
-                
-                temp = temp->next;
-                head2 = head2->next;
-            }
-            
-            return temp->data;
+            q =  (q != NULL) ? q->next : head1;
         }
         
-        else {
-            
-            len = (length2 - length1);
-            temp = FindCommon(head2,len);
-            
-            while(head1 != temp) {
-                
-                head1 = head1->next;
-                temp = temp->next;
-            }
-            
-            return temp->data;
-        }
-        
-        return -1;
+        return p->data;
     }
 };
 
