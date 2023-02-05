@@ -3,8 +3,6 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         
-        int target = 0;
-        
         sort(nums.begin(), nums.end());
         
         set<vector<int>> s;
@@ -21,7 +19,7 @@ public:
                 
                 int sum = nums[i] + nums[j] + nums[k];
                 
-                if (sum == target) {
+                if (sum == 0) {
                     
                     s.insert({nums[i], nums[j], nums[k]});
                     
@@ -30,7 +28,7 @@ public:
                     k--;
                     
                 } 
-                else if (sum < target) {
+                else if (sum < 0) {
                     
                     j++;
                 } 
@@ -42,6 +40,7 @@ public:
             }
             
         }
+        
         for(auto triplets : s)
             output.push_back(triplets);
         
