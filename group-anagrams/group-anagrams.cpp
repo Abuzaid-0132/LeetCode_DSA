@@ -19,9 +19,11 @@ public:
         
         for(int i = 0; i < strs.size(); i++) {
             
-            string s = strs[i];
+            string temp = strs[i];
+            
             sort(strs[i].begin(),strs[i].end());
-            map[strs[i]].push_back(s);
+            
+            map[strs[i]].push_back(temp);
         }
         
         
