@@ -1,23 +1,32 @@
 class Solution {
 public:
-    int lengthOfLongestSubstring(string s) {
+    int lengthOfLongestSubstring(string str) {
         
-        vector<int> vec(256,-1);
+        int n = str.size();
         
-        int max_len = 0;
-        int start = -1;
+        int result = 0;
         
-        for(int i=0;i<s.length();i++){
+        int i = 0, j = 0;
+        
+        set<int> set;
+        
+        while (j < n) {
             
-            if(vec[s[i]] > start)
-                start = vec[s[i]];
+        //Release
+            while (set.count(str[j]) != 0) {
+                
+                set.erase(str[i]);
+                i++;
+            }
             
-            vec[s[i]] = i;
+            //Acquire
+            set.insert(str[j]);
             
-            max_len = max(max_len,i-start);
-            
+            //Update result
+            result = max(result, j - i + 1);
+            j++;
         }
         
-        return max_len;
+        return result;
     }
 };
