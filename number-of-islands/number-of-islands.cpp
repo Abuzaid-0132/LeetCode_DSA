@@ -1,13 +1,12 @@
 class Solution {
 public:
-    
     void mark_island(vector<vector<char>>& matrix, int i, int j, int row, int col) {
         
         if(i < 0 || i >= row || j < 0 || j >= col || matrix[i][j] != '1')
             return;
         
         // Mark current cell as visited.
-        matrix[i][j] = 2;
+        matrix[i][j] = '2';
         
         // Make Recursive call in all 4 directions.
         mark_island(matrix, i+1, j, row, col); // Down
