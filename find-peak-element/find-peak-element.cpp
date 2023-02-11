@@ -1,7 +1,7 @@
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
-        
+        // Use Linar Search.
         int n = nums.size();
         
         if(nums.size() == 1)
