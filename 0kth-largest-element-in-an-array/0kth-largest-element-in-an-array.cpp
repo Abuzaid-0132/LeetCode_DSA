@@ -4,7 +4,7 @@ public:
         
         priority_queue<int, vector<int>, greater<int>> MinHeap;
         
-        for(int i=0; i<k; i++) 
+        for(int i=0; i<k; i++)
             MinHeap.push(nums[i]);
         
         for(int i=k; i<nums.size(); i++) {
@@ -17,7 +17,7 @@ public:
                 MinHeap.pop();
                 MinHeap.push(nums[i]);
             }
-                
+            
         }
         
         return MinHeap.top();
