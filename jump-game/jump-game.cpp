@@ -1,37 +1,20 @@
 class Solution {
 public:
-    
-    bool helper(vector<int> &nums, int curr, unordered_map<int, int> &map) {
+    bool canJump(vector<int>& nums) {
         
-        if(curr >= nums.size()-1)
-            return true;
+        int n = nums.size();
         
-        int currKey = curr;
+        int reachable = 0;
         
-        if(map.find(currKey) != map.end())
-            return map[currKey];
-        
-        int currJump = nums[curr];
-        
-        if(currJump >= nums.size() - curr)
-            return true;
-        
-        bool ans = false;
-        
-        for(int i=1; i<=currJump; i++) {
+        for(int i=0; i<n; i++)  {
             
-            bool tempAns = helper(nums, curr+i, map);
-            ans = ans || tempAns;
+            if(reachable < i)
+                return false;
+            
+            reachable = max(reachable, i + nums[i]);
             
         }
         
-        return map[currKey] = ans;
-    }
-    
-    bool canJump(vector<int>& nums) {
-        
-        unordered_map<int, int> map;
-        return helper(nums, 0, map);
-        
+        return true;
     }
 };
