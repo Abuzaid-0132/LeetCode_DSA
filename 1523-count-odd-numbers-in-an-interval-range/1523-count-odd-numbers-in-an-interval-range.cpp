@@ -2,7 +2,7 @@ class Solution {
 public:
     int countOdds(int low, int high) {
         
-        int nums = high - low + 1;    //counting total numbers in range
+        int nums = high - low + 1;    //counting total numbers in range{low, high}.
  
 		if(low % 2 != 0 && high % 2 != 0)  
             return nums / 2 + 1;
