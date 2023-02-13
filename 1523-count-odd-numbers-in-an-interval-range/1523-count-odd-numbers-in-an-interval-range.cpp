@@ -2,12 +2,13 @@ class Solution {
 public:
     int countOdds(int low, int high) {
         
-        int count = 0;
+        int nums = high - low + 1;    //counting total numbers in range
+ 
+		if(low % 2 != 0 && high % 2 != 0)  
+            return nums / 2 + 1;
         
-        for(int i=low; i<= high; i++)
-            if(i % 2 != 0)
-                count++;
+        else
+		    return nums / 2;
         
-        return count;
     }
 };
