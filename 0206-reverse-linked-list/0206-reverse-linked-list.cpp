@@ -10,14 +10,10 @@
  */
 class Solution {
 public:
-    
-    ListNode* Reverse_of_list(ListNode* root) {
-        
-        if(root == NULL)
-            return NULL;
+    ListNode* reverseList(ListNode* head) {
         
         ListNode* prev = NULL;
-        ListNode* curr = root;
+        ListNode* curr = head;
         
         while(curr != NULL) {
             
@@ -32,12 +28,5 @@ public:
         }
         
         return prev;
-    }
-    
-    
-    ListNode* reverseList(ListNode* head) {
-        
-        return Reverse_of_list(head);
-        
     }
 };
