@@ -1,7 +1,7 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        
+    
         int n = nums.size();
         
         if(n == 0 || n == 1)
