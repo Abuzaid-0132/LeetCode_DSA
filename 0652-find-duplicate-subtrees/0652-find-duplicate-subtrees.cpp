@@ -11,35 +11,34 @@
  */
 class Solution {
 public:
-    // Serialize subtrees and check for duplicates using a post-order traversal
-    string serializeSubtrees(TreeNode* node, unordered_map<string, int>& subtrees, vector<TreeNode*>& duplicates) {
+    unordered_map<string, int>u;
+    
+    vector<TreeNode*>ans;
+    
+    string dfs(TreeNode* root) {
         
-        if (!node) 
-            return "#"; // Null nodes are represented by '#'
+        string s1 = "", s2 = "", curr = to_string(root->val);
         
-        string left = serializeSubtrees(node->left, subtrees, duplicates);
-        string right = serializeSubtrees(node->right, subtrees, duplicates);
+        if (root -> left) 
+            s1 = dfs(root->left);
         
-        string s = left + "," + right + "," + to_string(node->val); // Serialize the current subtree
-        
-        if (subtrees[s] == 1) 
-            duplicates.push_back(node); // If a duplicate subtree is found, add to the vector
-        
-        subtrees[s]++;
+        if (root -> right) 
+            s2 = dfs(root->right);
         
 
-        return s;
+        string t = curr + "l" + s1 + "r" + s2;
+        u[t]++;
+        
+        if (u[t] == 2) 
+            ans.push_back(root);
+        
+        return t;
     }
     
-    
- vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
-     
-        unordered_map<string, int> subtrees; // Store serialized subtree and its frequency
-     
-        vector<TreeNode*> duplicates; // Store duplicate subtrees
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
         
-        serializeSubtrees(root, subtrees, duplicates); // Traverse the tree and serialize subtrees
+        dfs(root);
         
-        return duplicates;
+        return ans;
     }
 };
