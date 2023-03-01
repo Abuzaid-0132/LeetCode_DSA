@@ -2,50 +2,43 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         
-        sort(nums.begin(),nums.end());
-        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        set<vector<int>> st;
         
-        // Move for a 
-        for(int i=0; i<nums.size()-2; i++) {
+        vector<vector<int>> ans;
+        
+        for(int i=0; i<nums.size(); i++) {
             
-            if(i == 0 || (i > 0 && nums[i] != nums[i-1])) {
+            int j = i + 1;
+            
+            int k = nums.size() - 1;
+            
+            while(j < k) {
                 
-                int low = i+1;
-                int high = nums.size()-1;
-                int sum = 0-nums[i];
+                int sum = nums[i] + nums[j] + nums[k];
                 
-                while(low < high) {
+                if(sum == 0) {
                     
-                    if(nums[low] + nums[high] == sum){
-                        
-                        vector<int> temp;
-                        temp.push_back(nums[i]);
-                        temp.push_back(nums[low]);
-                        temp.push_back(nums[high]);
-                        
-                        res.push_back(temp);
-                        
-                        while(low < high && nums[low] == nums[low+1])
-                            low++;
-                        
-                        while(low < high && nums[high] == nums[high-1])
-                            high--;
-                        
-                        low++;
-                        high--;
-                        
-                    }
-                    else if(nums[low] + nums[high] < sum)
-                        low++;
-                    else
-                        high--;
+                    st.insert({nums[i],nums[j],nums[k]});
                     
+                    j++;
+                    k--;
                     
+                }
+                else if(sum < 0){
+                    j++;
+                }
+                else{
+                    k--;
                 }
                 
             }
             
         }
-        return res;
+        
+        for(auto triplets: st)
+            ans.push_back(triplets);
+        
+        return ans;
     }
 };
