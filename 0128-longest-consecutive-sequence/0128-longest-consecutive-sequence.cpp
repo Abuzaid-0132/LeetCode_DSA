@@ -12,21 +12,20 @@ public:
         
         for(int i=0; i<n; i++) {
             
-            if(set.find(nums[i] - 1) != set.end())
-                continue;
-            else{
-                int count = 0;
-                int current = nums[i];
+            
+            if(set.find(nums[i] -1) == set.end()) {
                 
-                while(set.find(current) != set.end()) {
-                    count++;
-                    current++;
-                }
+                int j = nums[i] + 1;
                 
-                ans = max(ans,count);
+                while(set.find(j) != set.end())
+                    j++;
+                
+                ans = max(ans, j - nums[i]);
+                
             }
             
         }
+        
         return ans;
     }
 };
